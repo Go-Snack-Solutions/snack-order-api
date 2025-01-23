@@ -1,8 +1,9 @@
 package com.gosnack.snack_order_api.service;
 
-import com.gosnack.snack_order_api.dto.SnackOrderDTO;
+import com.gosnack.snack_order_api.dto.SnackOrdeRecord;
 import com.gosnack.snack_order_api.model.SnackOrderModel;
 import com.gosnack.snack_order_api.repository.SnackOrderRepository;
+import com.gosnack.snack_order_api.utils.SnackOrderStatus;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,13 +25,16 @@ public class SnackOrderService {
         return snackOrderRepository.findById(UUID.fromString(orderId)).orElseThrow();
     }
 
-    public SnackOrderModel createOrder(SnackOrderDTO snackOrderDTO) {
+    public SnackOrderModel createOrder(SnackOrdeRecord snackOrderDTO) {
         var snackOrderModel = new SnackOrderModel();
-        BeanUtils.copyProperties(snackOrderDTO, snackOrderModel);
+        snackOrderModel.setOrderId("ORDER_" + UUID.randomUUID());
+        snackOrderModel.setSnackOrderStatus(SnackOrderStatus.PEDIDO_ACEITO);
+        snackOrderModel.setItem(snackOrderDTO.item());
+
         return snackOrderRepository.save(snackOrderModel);
     }
 
-    public SnackOrderModel updateOrder(String orderId, SnackOrderDTO snackOrderDTO) {
+    public SnackOrderModel updateOrder(String orderId, SnackOrdeRecord snackOrderDTO) {
         SnackOrderModel snackOrderModel = snackOrderRepository.findById(UUID.fromString(orderId)).orElseThrow();
         BeanUtils.copyProperties(snackOrderDTO, snackOrderModel);
         return snackOrderRepository.save(snackOrderModel);

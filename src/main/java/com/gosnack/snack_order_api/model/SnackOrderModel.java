@@ -11,16 +11,15 @@ import java.util.UUID;
 public class SnackOrderModel  implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID orderId;
+    private String orderId;
     private String item;
     private SnackOrderStatus snackOrderStatus;
 
-    public UUID getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(UUID orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 

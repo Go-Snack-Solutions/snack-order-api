@@ -1,9 +1,8 @@
 package com.gosnack.snack_order_api.controller;
 
-import com.gosnack.snack_order_api.dto.SnackOrderDTO;
+import com.gosnack.snack_order_api.dto.SnackOrdeRecord;
 import com.gosnack.snack_order_api.model.SnackOrderModel;
 import com.gosnack.snack_order_api.service.SnackOrderService;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,13 +35,13 @@ public class SnackOrderController {
 
     @PostMapping
     @CrossOrigin(origins = "*")
-    public ResponseEntity<SnackOrderModel> createSnackOrder(@RequestBody SnackOrderDTO snackOrderDTO) {
+    public ResponseEntity<SnackOrderModel> createSnackOrder(@RequestBody SnackOrdeRecord snackOrderDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(snackOrderService.createOrder(snackOrderDTO));
     }
 
     @PatchMapping("/{orderId}")
     @CrossOrigin(origins = "*")
-    public ResponseEntity<SnackOrderModel> updateSnackOrder(@PathVariable String orderId, @RequestBody SnackOrderDTO snackOrderDTO) {
+    public ResponseEntity<SnackOrderModel> updateSnackOrder(@PathVariable String orderId, @RequestBody SnackOrdeRecord snackOrderDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(snackOrderService.updateOrder(orderId, snackOrderDTO));
     }
 
