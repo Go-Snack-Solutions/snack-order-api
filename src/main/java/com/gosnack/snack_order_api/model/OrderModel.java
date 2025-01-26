@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "snack-orders")
+@Table(name = "orders")
 public class OrderModel implements Serializable {
 
     @Id
