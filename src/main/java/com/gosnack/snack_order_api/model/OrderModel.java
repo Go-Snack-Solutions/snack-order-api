@@ -1,8 +1,13 @@
 package com.gosnack.snack_order_api.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.gosnack.snack_order_api.utils.OrderStatus;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,6 +24,11 @@ public class OrderModel implements Serializable {
     private List<ItemModel> items;
 
     private OrderStatus orderStatus;
+
+
+    //TODO
+    // trazer lógica da data e hora do pedido para cá
+    // criar lógica de observação do pedido
 
     public Long getOrderId() {
         return orderId;
