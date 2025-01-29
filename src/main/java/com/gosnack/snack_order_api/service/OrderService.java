@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -54,17 +55,17 @@ public class OrderService {
         return orderDTO;
     }
 
-    public OrderModel updateOrder(Long orderId, OrderRecord snackOrderDTO) {
+    public OrderModel updateOrder(Long orderId, OrderRecord orderDTO) {
         logger.info("Iniciando atualização de pedido.");
 
-        OrderModel snackOrderModel = snackOrderRepository.findById(orderId).orElseThrow();
-        BeanUtils.copyProperties(snackOrderDTO, snackOrderModel);
-        //TODO
-        // Implementar a lógica de atualização de pedido
+        OrderModel orderModel = snackOrderRepository.findById(orderId).orElseThrow();
+
+        converters.convertItemRecordToItemModel(orderDTO.items(), orderModel);
 
         logger.info("Pedido com id: {} atualizado com sucesso.", orderId);
-        return snackOrderRepository.save(snackOrderModel);
+        return snackOrderRepository.save(orderModel);
     }
+
 
     public void deleteOrder(Long orderId) {
         logger.info("Iniciando exclusão de pedido.");

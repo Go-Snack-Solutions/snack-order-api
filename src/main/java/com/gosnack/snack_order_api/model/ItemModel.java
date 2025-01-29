@@ -21,7 +21,7 @@ public class ItemModel {
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
-    private OrderModel orders; // Relacionamento com OrderModel
+    private OrderModel orders;
 
     private String itemName;
     private double itemPrice;

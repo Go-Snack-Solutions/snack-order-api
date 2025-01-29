@@ -17,7 +17,7 @@ import java.util.List;
 public class OrderModel implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long orderId;
 
     @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -26,6 +26,9 @@ public class OrderModel implements Serializable {
     private OrderStatus orderStatus;
 
     private LocalDateTime orderTime = LocalDateTime.now();
+
+//    TODO
+//    updateOrderTime
 
     private String orderObservation;
 
