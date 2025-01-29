@@ -8,8 +8,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
-
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -25,10 +25,9 @@ public class OrderModel implements Serializable {
 
     private OrderStatus orderStatus;
 
+    private LocalDateTime orderTime = LocalDateTime.now();
 
-    //TODO
-    // trazer lógica da data e hora do pedido para cá
-    // criar lógica de observação do pedido
+    private String orderObservation;
 
     public Long getOrderId() {
         return orderId;
@@ -54,8 +53,21 @@ public class OrderModel implements Serializable {
         this.orderStatus = orderStatus;
     }
 
+    public LocalDateTime getOrderTime() {
+        return orderTime;
+    }
 
+    public void setOrderTime(LocalDateTime orderTime) {
+        this.orderTime = orderTime;
+    }
 
+    public String getOrderObservation() {
+        return orderObservation;
+    }
+
+    public void setOrderObservation(String orderObservation) {
+        this.orderObservation = orderObservation;
+    }
 
 
 }
