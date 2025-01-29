@@ -4,6 +4,7 @@ import com.gosnack.snack_order_api.dto.OrderRecord;
 import com.gosnack.snack_order_api.model.ItemModel;
 import com.gosnack.snack_order_api.model.OrderModel;
 import com.gosnack.snack_order_api.repository.OrderRepository;
+import com.gosnack.snack_order_api.utils.Converters;
 import com.gosnack.snack_order_api.utils.OrderStatus;
 import org.slf4j.Logger;
 import org.springframework.beans.BeanUtils;
@@ -21,6 +22,8 @@ public class OrderService {
     OrderRepository snackOrderRepository;
 
     private final Logger logger = getLogger(OrderService.class);
+
+    private final Converters converters = new Converters();
 
     public List<OrderModel> getAllOrders() {
         logger.info("Iniciando busca de pedidos.");
@@ -41,21 +44,8 @@ public class OrderService {
     }
 
     public OrderRecord createOrder(OrderRecord orderDTO) {
-        var orderModel = new OrderModel();
 
-        orderModel.setOrderStatus(OrderStatus.PEDIDO_ACEITO);
-
-        if (orderDTO.items() != null) {
-            List<ItemModel> itemModels = orderDTO.items().stream().map(itemRecord -> {
-                var itemModel = new ItemModel();
-                itemModel.setItemName(itemRecord.itemName());
-                itemModel.setItemPrice(itemRecord.itemPrice());
-                itemModel.setOrders(orderModel);
-                return itemModel;
-            }).toList();
-
-            orderModel.setItems(itemModels);
-        }
+        OrderModel orderModel = converters.convertOrderRecordToOrderModel(orderDTO);
 
         snackOrderRepository.save(orderModel);
 
