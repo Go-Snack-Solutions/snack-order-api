@@ -38,6 +38,8 @@ public class Converters {
 
         existingItems.clear();
 
+        orderModel.setUpdateOrderTime(LocalDateTime.now());
+
         for (var itemRecord : itemRecords) {
             var itemModel = new ItemModel();
             itemModel.setItemName(itemRecord.itemName());
