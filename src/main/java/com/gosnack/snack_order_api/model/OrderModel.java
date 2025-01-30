@@ -27,8 +27,7 @@ public class OrderModel implements Serializable {
 
     private LocalDateTime orderTime = LocalDateTime.now();
 
-//    TODO
-//    updateOrderTime
+    private LocalDateTime updateOrderTime;
 
     private String orderObservation;
 
@@ -70,6 +69,14 @@ public class OrderModel implements Serializable {
 
     public void setOrderObservation(String orderObservation) {
         this.orderObservation = orderObservation;
+    }
+
+    public LocalDateTime getUpdateOrderTime() {
+        return updateOrderTime;
+    }
+
+    public void setUpdateOrderTime(LocalDateTime updateOrderTime) {
+        this.updateOrderTime = updateOrderTime;
     }
 
 
