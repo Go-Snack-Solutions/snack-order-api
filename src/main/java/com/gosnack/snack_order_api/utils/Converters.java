@@ -5,6 +5,7 @@ import com.gosnack.snack_order_api.dto.OrderRecord;
 import com.gosnack.snack_order_api.model.ItemModel;
 import com.gosnack.snack_order_api.model.OrderModel;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,6 +34,7 @@ public class Converters {
     public void convertItemRecordToItemModel(List<ItemRecord> itemRecords, OrderModel orderModel) {
 
         List<ItemModel> existingItems = orderModel.getItems();
+
 
         existingItems.clear();
 

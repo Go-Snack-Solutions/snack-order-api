@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -35,7 +36,7 @@ public class OrderService {
         return orders;
     }
 
-    public OrderModel getOrderById(Long orderId) {
+    public OrderModel getOrderById(UUID orderId) {
         logger.info("Iniciando busca de pedido pelo id.");
         OrderModel order = snackOrderRepository.findById(orderId).orElseThrow();
 
@@ -44,7 +45,7 @@ public class OrderService {
         return order;
     }
 
-    public OrderRecord createOrder(OrderRecord orderDTO) {
+    public OrderModel createOrder(OrderRecord orderDTO) {
 
         OrderModel orderModel = converters.convertOrderRecordToOrderModel(orderDTO);
 
@@ -52,10 +53,10 @@ public class OrderService {
 
         logger.info("Pedido realizado com sucesso.");
 
-        return orderDTO;
+        return orderModel;
     }
 
-    public OrderModel updateOrder(Long orderId, OrderRecord orderDTO) {
+    public OrderModel updateOrder(UUID orderId, OrderRecord orderDTO) {
         logger.info("Iniciando atualização de pedido.");
 
         OrderModel orderModel = snackOrderRepository.findById(orderId).orElseThrow();
@@ -67,7 +68,7 @@ public class OrderService {
     }
 
 
-    public void deleteOrder(Long orderId) {
+    public void deleteOrder(UUID orderId) {
         logger.info("Iniciando exclusão de pedido.");
         OrderModel snackOrderModel = snackOrderRepository.findById(orderId).orElseThrow();
 
