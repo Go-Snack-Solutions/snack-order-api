@@ -4,6 +4,7 @@ import com.gosnack.snack_order_api.dto.OrderRecord;
 import com.gosnack.snack_order_api.model.ItemModel;
 import com.gosnack.snack_order_api.model.OrderModel;
 import com.gosnack.snack_order_api.repository.OrderRepository;
+import com.gosnack.snack_order_api.utils.Converters;
 import com.gosnack.snack_order_api.utils.OrderStatus;
 import org.slf4j.Logger;
 import org.springframework.beans.BeanUtils;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -22,6 +25,8 @@ public class OrderService {
 
     private final Logger logger = getLogger(OrderService.class);
 
+    private final Converters converters = new Converters();
+
     public List<OrderModel> getAllOrders() {
         logger.info("Iniciando busca de pedidos.");
         List<OrderModel> orders = snackOrderRepository.findAll();
@@ -31,7 +36,7 @@ public class OrderService {
         return orders;
     }
 
-    public OrderModel getOrderById(Long orderId) {
+    public OrderModel getOrderById(UUID orderId) {
         logger.info("Iniciando busca de pedido pelo id.");
         OrderModel order = snackOrderRepository.findById(orderId).orElseThrow();
 
@@ -40,43 +45,30 @@ public class OrderService {
         return order;
     }
 
-    public OrderRecord createOrder(OrderRecord orderDTO) {
-        var orderModel = new OrderModel();
+    public OrderModel createOrder(OrderRecord orderDTO) {
 
-        orderModel.setOrderStatus(OrderStatus.PEDIDO_ACEITO);
-
-        if (orderDTO.items() != null) {
-            List<ItemModel> itemModels = orderDTO.items().stream().map(itemRecord -> {
-                var itemModel = new ItemModel();
-                itemModel.setItemName(itemRecord.itemName());
-                itemModel.setItemPrice(itemRecord.itemPrice());
-                itemModel.setOrders(orderModel);
-                return itemModel;
-            }).toList();
-
-            orderModel.setItems(itemModels);
-        }
+        OrderModel orderModel = converters.convertOrderRecordToOrderModel(orderDTO);
 
         snackOrderRepository.save(orderModel);
 
         logger.info("Pedido realizado com sucesso.");
 
-        return orderDTO;
+        return orderModel;
     }
 
-    public OrderModel updateOrder(Long orderId, OrderRecord snackOrderDTO) {
+    public OrderModel updateOrder(UUID orderId, OrderRecord orderDTO) {
         logger.info("Iniciando atualização de pedido.");
 
-        OrderModel snackOrderModel = snackOrderRepository.findById(orderId).orElseThrow();
-        BeanUtils.copyProperties(snackOrderDTO, snackOrderModel);
-        //TODO
-        // Implementar a lógica de atualização de pedido
+        OrderModel orderModel = snackOrderRepository.findById(orderId).orElseThrow();
+
+        converters.convertItemRecordToItemModel(orderDTO.items(), orderModel);
 
         logger.info("Pedido com id: {} atualizado com sucesso.", orderId);
-        return snackOrderRepository.save(snackOrderModel);
+        return snackOrderRepository.save(orderModel);
     }
 
-    public void deleteOrder(Long orderId) {
+
+    public void deleteOrder(UUID orderId) {
         logger.info("Iniciando exclusão de pedido.");
         OrderModel snackOrderModel = snackOrderRepository.findById(orderId).orElseThrow();
 

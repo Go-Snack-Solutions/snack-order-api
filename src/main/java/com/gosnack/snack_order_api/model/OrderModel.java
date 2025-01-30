@@ -8,33 +8,35 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
-
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "orders")
 public class OrderModel implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID orderId;
 
     @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemModel> items;
 
     private OrderStatus orderStatus;
 
+    private LocalDateTime orderTime = LocalDateTime.now();
 
-    //TODO
-    // trazer lógica da data e hora do pedido para cá
-    // criar lógica de observação do pedido
+    private LocalDateTime updateOrderTime;
 
-    public Long getOrderId() {
+    private String orderObservation;
+
+    public UUID getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Long orderId) {
+    public void setOrderId(UUID orderId) {
         this.orderId = orderId;
     }
 
@@ -54,8 +56,29 @@ public class OrderModel implements Serializable {
         this.orderStatus = orderStatus;
     }
 
+    public LocalDateTime getOrderTime() {
+        return orderTime;
+    }
 
+    public void setOrderTime(LocalDateTime orderTime) {
+        this.orderTime = orderTime;
+    }
 
+    public String getOrderObservation() {
+        return orderObservation;
+    }
+
+    public void setOrderObservation(String orderObservation) {
+        this.orderObservation = orderObservation;
+    }
+
+    public LocalDateTime getUpdateOrderTime() {
+        return updateOrderTime;
+    }
+
+    public void setUpdateOrderTime(LocalDateTime updateOrderTime) {
+        this.updateOrderTime = updateOrderTime;
+    }
 
 
 }

@@ -9,32 +9,30 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-
-import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "items")
 public class ItemModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long itemId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID itemId;
 
 
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
-    private OrderModel orders; // Relacionamento com OrderModel
+    private OrderModel orders;
 
     private String itemName;
     private double itemPrice;
-    private LocalDateTime orderTime = LocalDateTime.now();
 
-    public Long getItemId() {
+    public UUID getItemId() {
         return itemId;
     }
 
-    public void setItemId(Long itemId) {
+    public void setItemId(UUID itemId) {
         this.itemId = itemId;
     }
 
@@ -62,11 +60,4 @@ public class ItemModel {
         this.itemPrice = itemPrice;
     }
 
-    public LocalDateTime getOrderTime() {
-        return orderTime;
-    }
-
-    public void setOrderTime(LocalDateTime orderTime) {
-        this.orderTime = orderTime;
-    }
 }
