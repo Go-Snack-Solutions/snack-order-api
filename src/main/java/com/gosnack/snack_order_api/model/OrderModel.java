@@ -32,6 +32,18 @@ public class OrderModel implements Serializable {
 
     private String orderObservation;
 
+    private LocalDateTime pedidoAceito;
+
+    private LocalDateTime pedidoCancelado;
+
+    private LocalDateTime pedidoEmPreparo;
+
+    private LocalDateTime pedidoPronto;
+
+    private LocalDateTime pedidoSaiuParaEntrega;
+
+    private LocalDateTime pedidoEntregue;
+
     public UUID getOrderId() {
         return orderId;
     }
@@ -80,5 +92,51 @@ public class OrderModel implements Serializable {
         this.updateOrderTime = updateOrderTime;
     }
 
+    public LocalDateTime getpedidoAceito() {
+        return pedidoAceito;
+    }
 
+    public void setPedidoAceito(LocalDateTime pedidoAceito) {
+            this.pedidoAceito = pedidoAceito;
+    }
+
+    public LocalDateTime getPedidoCancelado(){
+        return pedidoCancelado;
+    }
+
+    public void setPedidoCancelado(LocalDateTime pedidoCancelado) {
+        this.pedidoCancelado = pedidoCancelado;
+    }
+
+    public LocalDateTime getPedidoEmPreparo() {
+        return pedidoEmPreparo;
+    }
+
+    public void setPedidoEmPreparo(LocalDateTime pedidoEmPreparo) {
+        this.pedidoEmPreparo = pedidoEmPreparo;
+    }
+
+    public LocalDateTime getPedidoPronto() {
+        return pedidoPronto;
+    }
+
+    public void setPedidoPronto(LocalDateTime pedidoPronto) {
+        this.pedidoPronto = pedidoPronto;
+    }
+
+    public LocalDateTime getPedidoSaiuParaEntrega() {
+        return pedidoSaiuParaEntrega;
+    }
+
+    public void setPedidoSaiuParaEntrega(LocalDateTime pedidoSaiuParaEntrega) {
+        this.pedidoSaiuParaEntrega = pedidoSaiuParaEntrega;
+    }
+
+    public LocalDateTime getPedidoEntregue() {
+        return pedidoEntregue;
+    }
+
+    public void setPedidoEntregue(LocalDateTime pedidoEntregue) {
+        this.pedidoEntregue = pedidoEntregue;
+    }
 }
