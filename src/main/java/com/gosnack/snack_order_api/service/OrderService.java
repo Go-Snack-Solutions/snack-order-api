@@ -1,6 +1,7 @@
 package com.gosnack.snack_order_api.service;
 
 import com.gosnack.snack_order_api.dto.OrderRecord;
+import com.gosnack.snack_order_api.event.KafkaProducer;
 import com.gosnack.snack_order_api.model.ItemModel;
 import com.gosnack.snack_order_api.model.OrderModel;
 import com.gosnack.snack_order_api.repository.OrderRepository;

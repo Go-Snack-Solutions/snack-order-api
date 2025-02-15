@@ -2,6 +2,7 @@ package com.gosnack.snack_order_api.controller;
 
 import com.gosnack.snack_order_api.configuration.LoggerConfiguration;
 import com.gosnack.snack_order_api.dto.OrderRecord;
+import com.gosnack.snack_order_api.event.KafkaProducer;
 import com.gosnack.snack_order_api.model.OrderModel;
 import com.gosnack.snack_order_api.service.OrderService;
 import org.slf4j.Logger;
@@ -25,6 +26,9 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
+    @Autowired
+    KafkaProducer kafkaProducer;
+
     private final Logger logger = getLogger(OrderController.class);
 
     @GetMapping
@@ -45,6 +49,9 @@ public class OrderController {
     @ResponseStatus(HttpStatus.OK)
     public OrderModel createSnackOrder(@RequestBody OrderRecord snackOrderDTO) {
         logger.info("Criando pedido");
+
+        kafkaProducer.sendEvent("snack-order", "Pedido realizado com sucesso.");
+
         return orderService.createOrder(snackOrderDTO);
     }
 
