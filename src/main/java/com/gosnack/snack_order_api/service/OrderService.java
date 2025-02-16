@@ -2,20 +2,16 @@ package com.gosnack.snack_order_api.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gosnack.snack_order_api.dto.OrderRecord;
+import com.gosnack.snack_order_api.record.OrderRecord;
 import com.gosnack.snack_order_api.event.KafkaProducer;
-import com.gosnack.snack_order_api.model.ItemModel;
 import com.gosnack.snack_order_api.model.OrderModel;
 import com.gosnack.snack_order_api.repository.OrderRepository;
 import com.gosnack.snack_order_api.utils.Converters;
-import com.gosnack.snack_order_api.utils.OrderStatus;
 import org.slf4j.Logger;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -43,7 +39,7 @@ public class OrderService {
         return orders;
     }
 
-    public OrderModel getOrderById(UUID orderId) {
+    public OrderModel getOrderById(String orderId) {
         logger.info("Iniciando busca de pedido pelo id.");
         OrderModel order = snackOrderRepository.findById(orderId).orElseThrow();
 
@@ -72,7 +68,7 @@ public class OrderService {
         return orderModel;
     }
 
-    public OrderModel updateOrder(UUID orderId, OrderRecord orderDTO) {
+    public OrderModel updateOrder(String orderId, OrderRecord orderDTO) {
         logger.info("Iniciando atualização de pedido.");
 
         OrderModel orderModel = snackOrderRepository.findById(orderId).orElseThrow();
@@ -84,7 +80,7 @@ public class OrderService {
     }
 
 
-    public void deleteOrder(UUID orderId) {
+    public void deleteOrder(String orderId) {
         logger.info("Iniciando exclusão de pedido.");
         OrderModel snackOrderModel = snackOrderRepository.findById(orderId).orElseThrow();
 

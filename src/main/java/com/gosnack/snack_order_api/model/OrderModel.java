@@ -18,8 +18,7 @@ import java.util.UUID;
 public class OrderModel implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID orderId;
+    private String orderId;
 
     @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemModel> items;
@@ -32,11 +31,11 @@ public class OrderModel implements Serializable {
 
     private String orderObservation;
 
-    public UUID getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(UUID orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 
