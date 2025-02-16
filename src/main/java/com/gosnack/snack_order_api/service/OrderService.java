@@ -1,5 +1,7 @@
 package com.gosnack.snack_order_api.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gosnack.snack_order_api.dto.OrderRecord;
 import com.gosnack.snack_order_api.event.KafkaProducer;
 import com.gosnack.snack_order_api.model.ItemModel;
@@ -23,6 +25,10 @@ public class OrderService {
 
     @Autowired
     OrderRepository snackOrderRepository;
+
+    @Autowired
+    KafkaProducer kafkaProducer;
+
 
     private final Logger logger = getLogger(OrderService.class);
 
@@ -51,6 +57,15 @@ public class OrderService {
         OrderModel orderModel = converters.convertOrderRecordToOrderModel(orderDTO);
 
         snackOrderRepository.save(orderModel);
+
+        try {
+            String jsonMessage = new ObjectMapper().writeValueAsString(orderDTO);
+
+            kafkaProducer.sendEvent("snack-order", jsonMessage);
+        } catch (JsonProcessingException e) {
+            logger.error("Erro ao converter objeto para JSON", e);
+            throw new RuntimeException("Falha ao processar JSON", e);
+        }
 
         logger.info("Pedido realizado com sucesso.");
 

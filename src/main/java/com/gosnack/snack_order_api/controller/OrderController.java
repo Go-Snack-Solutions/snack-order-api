@@ -26,9 +26,6 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
-    @Autowired
-    KafkaProducer kafkaProducer;
-
     private final Logger logger = getLogger(OrderController.class);
 
     @GetMapping
@@ -49,8 +46,6 @@ public class OrderController {
     @ResponseStatus(HttpStatus.OK)
     public OrderModel createSnackOrder(@RequestBody OrderRecord snackOrderDTO) {
         logger.info("Criando pedido");
-
-        kafkaProducer.sendEvent("snack-order", "Pedido realizado com sucesso.");
 
         return orderService.createOrder(snackOrderDTO);
     }
