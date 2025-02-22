@@ -25,6 +25,11 @@ dependencies {
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
 	implementation("org.hibernate.orm:hibernate-core:6.5.2.Final")
+
+	// Kafka
+	implementation("org.springframework.kafka:spring-kafka")
+	implementation("com.fasterxml.jackson.core:jackson-databind")
+
 }
 
 tasks.withType<Test> {

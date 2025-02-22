@@ -14,7 +14,7 @@ spring:
       enabled: ALWAYS
 
   kafka:
-    bootstrap-servers: localhost:9092 # Altere para o endereço do seu broker Kafka
+    bootstrap-servers: localhost:9093
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
@@ -32,3 +32,4 @@ management:
     export:
       prometheus:
         enabled: true
+

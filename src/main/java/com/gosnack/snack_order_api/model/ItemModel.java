@@ -16,8 +16,7 @@ import java.util.UUID;
 public class ItemModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID itemId;
+    private String itemId;
 
 
     @JsonIgnore
@@ -28,11 +27,11 @@ public class ItemModel {
     private String itemName;
     private double itemPrice;
 
-    public UUID getItemId() {
+    public String getItemId() {
         return itemId;
     }
 
-    public void setItemId(UUID itemId) {
+    public void setItemId(String itemId) {
         this.itemId = itemId;
     }
 
