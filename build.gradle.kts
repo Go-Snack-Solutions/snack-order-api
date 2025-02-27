@@ -22,9 +22,15 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+	testImplementation("org.junit.jupiter:junit-jupiter-api:5.12.0-RC1")
+
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
 	implementation("org.hibernate.orm:hibernate-core:6.5.2.Final")
+
+	implementation("org.springframework.kafka:spring-kafka")
+	implementation("com.fasterxml.jackson.core:jackson-databind")
 }
 
 tasks.withType<Test> {

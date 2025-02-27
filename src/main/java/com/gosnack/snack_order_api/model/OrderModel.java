@@ -11,7 +11,6 @@ import jakarta.persistence.CascadeType;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "orders")
@@ -19,7 +18,7 @@ public class OrderModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID orderId;
+    private Long orderId;
 
     @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemModel> items;
@@ -32,23 +31,23 @@ public class OrderModel implements Serializable {
 
     private String orderObservation;
 
-    private LocalDateTime pedidoAceito;
+    private LocalDateTime orderAccept;
 
-    private LocalDateTime pedidoCancelado;
+    private LocalDateTime orderCanceled;
 
-    private LocalDateTime pedidoEmPreparo;
+    private LocalDateTime orderInPreparation;
 
-    private LocalDateTime pedidoPronto;
+    private LocalDateTime orderReady;
 
-    private LocalDateTime pedidoSaiuParaEntrega;
+    private LocalDateTime orderOutToDelivery;
 
-    private LocalDateTime pedidoEntregue;
+    private LocalDateTime orderDelivered;
 
-    public UUID getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(UUID orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
@@ -92,51 +91,51 @@ public class OrderModel implements Serializable {
         this.updateOrderTime = updateOrderTime;
     }
 
-    public LocalDateTime getpedidoAceito() {
-        return pedidoAceito;
+    public LocalDateTime getOrderAccept() {
+        return orderAccept;
     }
 
-    public void setPedidoAceito(LocalDateTime pedidoAceito) {
-            this.pedidoAceito = pedidoAceito;
+    public void setOrderAccept(LocalDateTime orderAccept) {
+            this.orderAccept = orderAccept;
     }
 
-    public LocalDateTime getPedidoCancelado(){
-        return pedidoCancelado;
+    public LocalDateTime setOrderCanceled(){
+        return orderCanceled;
     }
 
-    public void setPedidoCancelado(LocalDateTime pedidoCancelado) {
-        this.pedidoCancelado = pedidoCancelado;
+    public void setOrderCanceled(LocalDateTime orderCanceled) {
+        this.orderCanceled = orderCanceled;
     }
 
-    public LocalDateTime getPedidoEmPreparo() {
-        return pedidoEmPreparo;
+    public LocalDateTime setOrderInPreparation() {
+        return orderInPreparation;
     }
 
-    public void setPedidoEmPreparo(LocalDateTime pedidoEmPreparo) {
-        this.pedidoEmPreparo = pedidoEmPreparo;
+    public void setOrderInPreparation(LocalDateTime orderInPreparation) {
+        this.orderInPreparation = orderInPreparation;
     }
 
-    public LocalDateTime getPedidoPronto() {
-        return pedidoPronto;
+    public LocalDateTime setOrderReady() {
+        return orderReady;
     }
 
-    public void setPedidoPronto(LocalDateTime pedidoPronto) {
-        this.pedidoPronto = pedidoPronto;
+    public void setOrderReady(LocalDateTime orderReady) {
+        this.orderReady = orderReady;
     }
 
-    public LocalDateTime getPedidoSaiuParaEntrega() {
-        return pedidoSaiuParaEntrega;
+    public LocalDateTime setOrderOutToDelivery() {
+        return orderOutToDelivery;
     }
 
-    public void setPedidoSaiuParaEntrega(LocalDateTime pedidoSaiuParaEntrega) {
-        this.pedidoSaiuParaEntrega = pedidoSaiuParaEntrega;
+    public void setOrderOutToDelivery(LocalDateTime orderOutToDelivery) {
+        this.orderOutToDelivery = orderOutToDelivery;
     }
 
-    public LocalDateTime getPedidoEntregue() {
-        return pedidoEntregue;
+    public LocalDateTime setOrderDelivered() {
+        return orderDelivered;
     }
 
-    public void setPedidoEntregue(LocalDateTime pedidoEntregue) {
-        this.pedidoEntregue = pedidoEntregue;
+    public void setOrderDelivered(LocalDateTime orderDelivered) {
+        this.orderDelivered = orderDelivered;
     }
 }

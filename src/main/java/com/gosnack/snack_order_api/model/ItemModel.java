@@ -9,15 +9,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-import java.util.UUID;
-
 @Entity
 @Table(name = "items")
 public class ItemModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID itemId;
+    private Long itemId;
 
 
     @JsonIgnore
@@ -28,11 +26,11 @@ public class ItemModel {
     private String itemName;
     private double itemPrice;
 
-    public UUID getItemId() {
+    public Long getItemId() {
         return itemId;
     }
 
-    public void setItemId(UUID itemId) {
+    public void setItemId(Long itemId) {
         this.itemId = itemId;
     }
 
