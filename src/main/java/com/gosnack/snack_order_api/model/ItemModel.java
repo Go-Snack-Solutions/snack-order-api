@@ -1,13 +1,7 @@
 package com.gosnack.snack_order_api.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
@@ -24,7 +18,10 @@ public class ItemModel {
     @JoinColumn(name = "order_id", nullable = false)
     private OrderModel orders;
 
+    @Column(name = "item_name")
     private String itemName;
+
+    @Column(name = "item_price")
     private double itemPrice;
 
     public String getItemId() {

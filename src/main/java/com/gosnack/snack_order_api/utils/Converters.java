@@ -7,6 +7,7 @@ import com.gosnack.snack_order_api.model.OrderModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 public class Converters {
 
@@ -14,12 +15,12 @@ public class Converters {
 
         var orderModel = new OrderModel();
 
-        orderModel.setOrderId(orderRecord.orderId());
+        orderModel.setOrderId("ORDER_" + UUID.randomUUID().toString().toUpperCase());
 
         if (orderRecord.items() != null) {
             List<ItemModel> itemModels = orderRecord.items().stream().map(itemRecord -> {
                 var itemModel = new ItemModel();
-                itemModel.setItemId(itemRecord.itemId());
+                itemModel.setItemId("ITEM_" + UUID.randomUUID().toString().toUpperCase());
                 itemModel.setItemName(itemRecord.itemName());
                 itemModel.setItemPrice(itemRecord.itemPrice());
                 itemModel.setOrders(orderModel);
@@ -29,7 +30,9 @@ public class Converters {
             orderModel.setItems(itemModels);
         }
 
-        orderModel.setOrderStatus(orderRecord.orderStatus());
+        orderModel.setOrderStatus(OrderStatus.PEDIDO_ACEITO);
+
+        orderModel.setOrderTime(LocalDateTime.now());
 
         return orderModel;
     }

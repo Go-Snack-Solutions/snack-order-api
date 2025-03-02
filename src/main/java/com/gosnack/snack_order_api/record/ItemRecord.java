@@ -1,10 +1,13 @@
 package com.gosnack.snack_order_api.record;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.UUID;
 
-public record ItemRecord(String itemId, String itemName, double itemPrice) {
+public record ItemRecord(
+        @JsonProperty("item_id") String itemId,
+        @JsonProperty("item_name") String itemName,
+        @JsonProperty("item_price") double itemPrice
+) {
 
-    public ItemRecord {
-            itemId = "ITEM_" + UUID.randomUUID().toString().toUpperCase(); // Gera um UUID automaticamente
-    }
 }
