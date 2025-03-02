@@ -35,6 +35,11 @@ dependencies {
 
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.2")
 
+	testImplementation("org.junit.jupiter:junit-jupiter:5.9.3")
+	testImplementation("org.mockito:mockito-core:5.3.1")
+	testImplementation("org.mockito:mockito-junit-jupiter:5.3.1")
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
 }
 
 tasks.withType<Test> {

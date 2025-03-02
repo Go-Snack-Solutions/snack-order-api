@@ -1,6 +1,5 @@
 package com.gosnack.snack_order_api.event;
 
-import com.gosnack.snack_order_api.event.KafkaProducer;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

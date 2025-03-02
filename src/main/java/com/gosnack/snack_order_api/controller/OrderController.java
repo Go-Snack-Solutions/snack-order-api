@@ -9,9 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
-
-import static org.hibernate.internal.CoreLogging.logger;
 import static org.slf4j.LoggerFactory.getLogger;
 
 @RestController
