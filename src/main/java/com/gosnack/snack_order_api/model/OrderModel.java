@@ -32,6 +32,19 @@ public class OrderModel implements Serializable {
     private String orderObservation;
 
     public String getOrderId() {
+    private LocalDateTime orderAccept;
+
+    private LocalDateTime orderCanceled;
+
+    private LocalDateTime orderInPreparation;
+
+    private LocalDateTime orderReady;
+
+    private LocalDateTime orderOutToDelivery;
+
+    private LocalDateTime orderDelivered;
+
+    public Long getOrderId() {
         return orderId;
     }
 
@@ -79,5 +92,51 @@ public class OrderModel implements Serializable {
         this.updateOrderTime = updateOrderTime;
     }
 
+    public LocalDateTime getOrderAccept() {
+        return orderAccept;
+    }
 
+    public void setOrderAccept(LocalDateTime orderAccept) {
+            this.orderAccept = orderAccept;
+    }
+
+    public LocalDateTime setOrderCanceled(){
+        return orderCanceled;
+    }
+
+    public void setOrderCanceled(LocalDateTime orderCanceled) {
+        this.orderCanceled = orderCanceled;
+    }
+
+    public LocalDateTime setOrderInPreparation() {
+        return orderInPreparation;
+    }
+
+    public void setOrderInPreparation(LocalDateTime orderInPreparation) {
+        this.orderInPreparation = orderInPreparation;
+    }
+
+    public LocalDateTime setOrderReady() {
+        return orderReady;
+    }
+
+    public void setOrderReady(LocalDateTime orderReady) {
+        this.orderReady = orderReady;
+    }
+
+    public LocalDateTime setOrderOutToDelivery() {
+        return orderOutToDelivery;
+    }
+
+    public void setOrderOutToDelivery(LocalDateTime orderOutToDelivery) {
+        this.orderOutToDelivery = orderOutToDelivery;
+    }
+
+    public LocalDateTime setOrderDelivered() {
+        return orderDelivered;
+    }
+
+    public void setOrderDelivered(LocalDateTime orderDelivered) {
+        this.orderDelivered = orderDelivered;
+    }
 }
